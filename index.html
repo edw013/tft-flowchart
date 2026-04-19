@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TFT Set 17 Flowchart Maker</title>
+    <link rel="preconnect" href="https://raw.communitydragon.org" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">TFT Set 17</p>
+          <h1>Flowchart Maker</h1>
+          <p class="hero-copy">
+            Map your opener into a late-game board. Filter by starting units and
+            components, then duplicate a path and tune it for your own lines.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="new-path-button" class="button primary">New Line</button>
+          <button id="export-button" class="button ghost">Export JSON</button>
+          <label class="button ghost file-button" for="import-input">Import JSON</label>
+          <input id="import-input" type="file" accept="application/json" hidden />
+          <span id="data-status" class="pill">Loading Set 17 art…</span>
+        </div>
+      </header>
+
+      <section class="gallery-view">
+        <div class="gallery-toolbar">
+          <input
+            type="search"
+            id="gallery-search"
+            class="search-input"
+            placeholder="Search lines by name, tag, or summary…"
+          />
+        </div>
+        <div id="paths-grid" class="lines-list"></div>
+      </section>
+    </div>
+
+    <!-- Viewer overlay — read-only flowchart -->
+    <div id="viewer-overlay" class="viewer-overlay" role="dialog" aria-modal="true" aria-label="Line Viewer">
+      <div class="viewer-sheet">
+        <div class="viewer-header">
+          <div class="viewer-header-title">
+            <h2 id="viewer-path-name" class="viewer-path-name"></h2>
+            <p id="viewer-path-summary" class="panel-subtitle"></p>
+          </div>
+          <div class="viewer-header-actions">
+            <button id="viewer-edit-button" class="button primary" type="button">Edit</button>
+            <button id="viewer-duplicate-button" class="button secondary" type="button">Duplicate</button>
+            <button id="viewer-delete-button" class="button ghost danger hidden" type="button">Delete</button>
+          </div>
+          <button id="close-viewer-button" class="icon-button" type="button" title="Close">✕</button>
+        </div>
+        <div class="viewer-body">
+          <div id="viewer-flowchart" class="flowchart-canvas"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor overlay — always in DOM, visibility controlled via .open class -->
+    <div id="editor-overlay" class="editor-overlay" role="dialog" aria-modal="true" aria-label="Line Editor">
+      <div class="editor-sheet">
+        <div class="editor-header">
+          <div class="editor-header-title">
+            <input id="active-path-name" class="path-name-input" type="text" placeholder="Line name…" maxlength="80" />
+            <p id="active-path-summary" class="panel-subtitle">Choose a suggestion or create a blank flowchart.</p>
+          </div>
+          <div class="editor-header-actions">
+            <button id="duplicate-path-button" class="button secondary">Duplicate</button>
+            <button id="delete-line-button" class="button ghost danger hidden" type="button">Delete</button>
+          </div>
+          <button id="close-editor-button" class="icon-button" type="button" title="Close">✕</button>
+        </div>
+        <div class="editor-body">
+          <main class="workspace">
+            <section class="panel flowchart-panel">
+              <div id="flowchart-canvas" class="flowchart-canvas empty-state">
+                <p>Your flowchart will render here.</p>
+              </div>
+            </section>
+          </main>
+        </div>
+
+        <div class="bench-panel">
+          <div class="bench-toolbar">
+            <input
+              type="search"
+              id="bench-search"
+              class="bench-search-input"
+              placeholder="Search champions, items, augments…"
+              autocomplete="off"
+            />
+          </div>
+          <div id="roster-grid" class="bench-columns"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./scripts/main.js"></script>
+  </body>
+</html>
