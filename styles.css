@@ -1251,3 +1251,10 @@ textarea {
     display: none;
   }
 }
+
+.legal {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.75rem;
+  color: #666;
+}
